@@ -1,15 +1,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html" />
-<!--<link rel="import" href="../bower_components/firebase-element/firebase-document.html" />-->
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html" />
-<!--<link rel="import" href="../bower_components/paper-input/paper-input.html" />-->
-<!--<link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html" />-->
-<!--<link rel="import" href="../bower_components/paper-button/paper-button.html" />-->
-<!--<link rel="import" href="../bower_components/gold-email-input/gold-email-input.html" />-->
+
 <!--neon things-->
 <link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
 <link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
 
-<script src="../bower_components/firebase/firebase.js"></script>
 
 <dom-module id="landing-element">
     <style>
@@ -20,9 +15,21 @@
         height:100%;
         width:auto;
         overflow:hidden;
-        /*vertical-align: top;*/
-        /*background-image: url("../media/forest-trees-fog-foggy.jpg");*/
-        /*background-color: #cccccc;*/
+    }
+    .transparent {
+        opacity:0;
+    }
+    .opaque {
+        opacity:1.0;
+        transition: opacity ease-in-out 0.5s;
+        --moz-transition: opacity ease-in-out 0.5s;
+        --webkit-transition: opacity ease-in-out 0.5s;
+    }
+    .quickOpaque {
+        opacity:1.0;
+        transition: opacity ease-in-out 0.1s;
+        --moz-transition: opacity ease-in-out 0.1s;
+        --webkit-transition: opacity ease-in-out 0.1s;
     }
     #header {
         position:fixed;
@@ -117,10 +124,10 @@
     <template>
         <!--<paper-header-panel><div class="paper-header">Header</div></paper-header-panel>-->
         <!--<div id="background">-->
-        <img id="background" src="../media/forest-trees-fog-foggy.jpg">
+        <img id="background" class$="{{backgroundClass}}" src="../media/forest-trees-fog-foggy-min.jpg">
         <div id="header">
             <a href="http://www.firebase.com">
-            <div id="headerWrapper">
+            <div id="headerWrapper" class$="{{headerClass}}">
                 
                 <h1 id="firbaseLogo"><img src="../media/harmonic-Tree.svg" height="25" style="padding:5px; margin-bottom:-6px">Firbase</h1>
                 <span></span>
@@ -147,12 +154,23 @@
 <script>
     Polymer({
         is: "landing-element",
-        properties: {},
+        properties: {
+            backgroundClass: {
+                type:String,
+                value: "transparent"
+            },
+            headerClass: {
+                type:String,
+                value: "transparent"
+            }
+        },
         observers: [],
         ready: function () {
+            this.async(function () {this.set('headerClass', "quickOpaque")}, 5);
+            this.async(function () {this.set('backgroundClass', "opaque")}, 20);
             this.async(function () {
                 this.$.goToDialog.open();
-            }, 4500);
+            }, 3000);
         }
     })
 </script>
