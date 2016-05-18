@@ -1,0 +1,158 @@
+<link rel="import" href="../bower_components/polymer/polymer.html" />
+<!--<link rel="import" href="../bower_components/firebase-element/firebase-document.html" />-->
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html" />
+<!--<link rel="import" href="../bower_components/paper-input/paper-input.html" />-->
+<!--<link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html" />-->
+<!--<link rel="import" href="../bower_components/paper-button/paper-button.html" />-->
+<!--<link rel="import" href="../bower_components/gold-email-input/gold-email-input.html" />-->
+<!--neon things-->
+<link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+
+<script src="../bower_components/firebase/firebase.js"></script>
+
+<dom-module id="landing-element">
+    <style>
+    * {
+        font-family:Roboto, Arial;
+    }
+    #background {
+        height:100%;
+        width:auto;
+        overflow:hidden;
+        /*vertical-align: top;*/
+        /*background-image: url("../media/forest-trees-fog-foggy.jpg");*/
+        /*background-color: #cccccc;*/
+    }
+    #header {
+        position:fixed;
+        top:0px;
+        height:70px;
+        background:white;
+        width:100%;
+        padding-left:20px;
+        display:flex;
+        align-content:center;
+        align-items:center;
+        justify-content:space-around;
+    }
+    #headerWrapper {
+        display:flex;
+        align-content:center;
+        align-items:center;
+        justify-content:space-around;
+        max-width:1000px;
+        color:black;
+    }
+    h1 {
+        color: #333;
+        letter-spacing:-1px;
+    }
+    .headerlink {
+        display:none;
+    }
+    #tagLine {
+        background-color: rgba(255,0,0,0);
+        color:rgba(26,26,26,1);
+        /*background:red;*/
+        width: 75%;
+        position: fixed;
+        left: 50%;
+        margin-left: -37.5%;
+        top:90px;
+        text-align:center;
+        font-weight:lighter;
+    }
+    a {
+        text-decoration:none;
+        color:#208040;
+    }
+    #dialogDiv {
+        text-align:center;
+        font-size:4vw;
+    }
+    @media screen and (min-aspect-ratio: 3/2) {
+        #background {
+            position:fixed;
+            width:100%;
+            height:auto;
+            overflow:hidden;
+            bottom:0px;
+            /*background-image: url("../media/forest-trees-fog-foggy.jpg");*/
+            /*background-color: #cccccc;*/
+        }
+        #headerWrapper {
+            display:flex;
+            align-content:center;
+            align-items:center;
+            justify-content:space-around;
+            max-width:1000px;
+        }
+        .headerlink {
+            display:inline;
+            font-weight:lighter;
+            padding:30px;
+            font-size:12px;
+        }
+        #tagLine {
+            background-color: rgba(255,0,0,0);
+            color:rgba(255,255,255,1);
+            /*background:red;*/
+            width: 75%;
+            position: fixed;
+            left: 50%;
+            margin-left: -37.5%;
+            top:90px;
+            text-align:center;
+            font-weight:lighter;
+        }
+        #dialogDiv { 
+            font-size:18pt;
+        }
+        #firbaseLogo {
+            padding-right:40px;
+        }
+    }
+    </style>
+    <template>
+        <!--<paper-header-panel><div class="paper-header">Header</div></paper-header-panel>-->
+        <!--<div id="background">-->
+        <img id="background" src="../media/forest-trees-fog-foggy.jpg">
+        <div id="header">
+            <a href="http://www.firebase.com">
+            <div id="headerWrapper">
+                
+                <h1 id="firbaseLogo"><img src="../media/harmonic-Tree.svg" height="25" style="padding:5px; margin-bottom:-6px">Firbase</h1>
+                <span></span>
+                <span class="headerlink">NOT</span>
+                <span class="headerlink">THE</span>
+                <span class="headerlink">PAGE</span>
+                <span class="headerlink">YOU</span>
+                <span class="headerlink">WANTED</span>
+            </div>
+            </a>
+        </div>
+        <h1 id="tagLine">Build Extraordinary Log Cabins</h1>
+            <paper-dialog id="goToDialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+                <div id="dialogDiv">
+                    <div style="margin:10px">
+                       You are probably looking for Firebase:
+                    </div>
+                    <a href="http://www.firebase.com">Take me to firebase.com</a>
+                </div>
+            </paper-dialog>
+        <!--</div>-->
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: "landing-element",
+        properties: {},
+        observers: [],
+        ready: function () {
+            this.async(function () {
+                this.$.goToDialog.open();
+            }, 4500);
+        }
+    })
+</script>
